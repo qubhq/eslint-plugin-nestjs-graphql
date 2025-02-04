@@ -1,5 +1,10 @@
 # eslint-plugin-nestjs-graphql
 
+> **Note**  
+> This fork of `eslint-plugin-nestjs-graphql` extends the original functionality
+> by adding support for some [`graphql-scalars`](https://www.npmjs.com/package/graphql-scalars)
+types as needed.
+
 [![npm](https://img.shields.io/npm/v/eslint-plugin-nestjs-graphql.svg)](https://www.npmjs.com/package/eslint-plugin-nestjs-graphql)
 
 This plugin intends to prevent issues with returning the wrong type from NestJS GraphQL resolvers. Relevant to [Code first](https://docs.nestjs.com/graphql/quick-start#code-first) approach.
