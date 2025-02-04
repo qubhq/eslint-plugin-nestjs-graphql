@@ -6,7 +6,7 @@ import { RuleContext } from '@typescript-eslint/utils/dist/ts-eslint'
 const createRule = ESLintUtils.RuleCreator((name) => name)
 
 const types = {
-  TSStringKeyword: ['String'],
+  TSStringKeyword: ['String', 'GraphQLUUID'],
   TSBooleanKeyword: ['Boolean'],
   TSNumberKeyword: ['Int', 'Number', 'Float'],
 }
