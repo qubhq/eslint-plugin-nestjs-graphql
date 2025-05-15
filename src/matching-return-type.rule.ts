@@ -16,9 +16,9 @@ const unwrapPromise = (typeNode: TSESTree.TypeNode) => {
     typeNode.type === 'TSTypeReference' &&
     typeNode.typeName.type === 'Identifier' &&
     typeNode.typeName.name === 'Promise' &&
-    typeNode.typeParameters
+    typeNode.typeArguments
   ) {
-    return typeNode.typeParameters.params[0]
+    return typeNode.typeArguments.params[0]
   }
 }
 
@@ -173,15 +173,15 @@ const processNode = (
         topReturnType.typeName.name === 'Array'
       ) {
         if (
-          topReturnType.typeParameters?.params[0].type !== 'TSTypeQuery' ||
-          topReturnType.typeParameters?.params[0].exprName.type !== 'Identifier'
+          topReturnType.typeArguments?.params[0].type !== 'TSTypeQuery' ||
+          topReturnType.typeArguments?.params[0].exprName.type !== 'Identifier'
         ) {
           throw new Error(
             'Unexpected array argument type - please contact the author of the rule',
           )
         }
 
-        return topReturnType.typeParameters.params[0].exprName.name
+        return topReturnType.typeArguments.params[0].exprName.name
       }
 
       if (topReturnType.type === 'TSArrayType') {
