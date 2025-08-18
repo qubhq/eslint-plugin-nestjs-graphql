@@ -16,7 +16,7 @@
     "dist/**"
   ],
   "scripts": {
-    "bump": "npx npm-check-updates -u --deep && pnpm i && pnpm upgrade",
+    "bump": "pnpx npm-check-updates -u --deep && pnpm i && pnpm upgrade",
     "build": "pnpm tsc"
   },
   "keywords": ["eslint", "plugin", "nestjs", "graphql"],

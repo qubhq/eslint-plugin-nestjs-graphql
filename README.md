@@ -4,7 +4,8 @@
 > This fork of `eslint-plugin-nestjs-graphql` extends the original functionality
 > by adding support for some [`graphql-scalars`](https://www.npmjs.com/package/graphql-scalars)
 types as needed.  
-> Also adds support for `@typescript-eslint` v8
+> Also adds support for `@typescript-eslint` v8  
+> Introduced new rule: `args-nullable-optional`
 
 [![npm](https://img.shields.io/npm/v/eslint-plugin-nestjs-graphql.svg)](https://www.npmjs.com/package/eslint-plugin-nestjs-graphql)
 
@@ -16,6 +17,7 @@ The plugin supports rules:
 
 `matching-return-type`
 `matching-resolve-field-parent-type`
+`args-nullable-optional`
 
 ## Motivation
 
@@ -139,6 +141,66 @@ This rule aims to solve this issue by checking the type of the `@Parent` against
   }
 ```
 
+### args-nullable-optional
+
+When using the `@Args` decorator in NestJS GraphQL resolvers, there's a common mismatch between the `nullable` property in the decorator options and the optionality of the parameter in TypeScript. If an argument is marked as `nullable: true` in GraphQL, it should be optional in TypeScript (using `?`), and vice versa.
+
+This rule ensures consistency between GraphQL schema nullability and TypeScript parameter optionality to prevent runtime errors and improve type safety.
+
+*Valid*
+
+```typescript
+  // Correct: nullable args with optional parameter
+  async locations(
+    @BusinessId() businessId: string, 
+    @Args('input', { nullable: true }) input?: LocationsQueryInput
+  ): Promise<LocationModel[]> {
+    return this.locationsService.getAllLocationsForBusiness(businessId, input)
+  }
+```
+
+```typescript
+  // Correct: required args with non-optional parameter
+  async locations(
+    @BusinessId() businessId: string, 
+    @Args('input') input: LocationsQueryInput
+  ): Promise<LocationModel[]> {
+    return this.locationsService.getAllLocationsForBusiness(businessId, input)
+  }
+```
+
+```typescript
+  // Correct: explicitly non-nullable args with non-optional parameter
+  async locations(
+    @BusinessId() businessId: string, 
+    @Args('input', { nullable: false }) input: LocationsQueryInput
+  ): Promise<LocationModel[]> {
+    return this.locationsService.getAllLocationsForBusiness(businessId, input)
+  }
+```
+
+*Invalid*
+
+```typescript
+  // Invalid: nullable args but parameter is not optional
+  async locations(
+    @BusinessId() businessId: string, 
+    @Args('input', { nullable: true }) input: LocationsQueryInput
+  ): Promise<LocationModel[]> {
+    return this.locationsService.getAllLocationsForBusiness(businessId, input)
+  }
+```
+
+```typescript
+  // Invalid: optional parameter but args is not nullable
+  async locations(
+    @BusinessId() businessId: string, 
+    @Args('input') input?: LocationsQueryInput
+  ): Promise<LocationModel[]> {
+    return this.locationsService.getAllLocationsForBusiness(businessId, input)
+  }
+```
+
 ## Installation
 
 ```sh
@@ -154,6 +216,7 @@ The rules are off by default. To turn them on, add the following to your `.eslin
   "rules": {
     "nestjs-graphql/matching-return-type": "error", // `error` level is recommended
     "nestjs-graphql/matching-resolve-field-parent-type": "error", // `error` level is recommended
+    "nestjs-graphql/args-nullable-optional": "error" // `error` level is recommended
   }
 }
 ```
