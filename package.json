@@ -1,15 +1,16 @@
 {
   "name": "@qubhq/eslint-plugin-nestjs-graphql",
-  "author": "Vladyslav Zavalykhatko",
-  "homepage": "https://github.com/Hatko/eslint-plugin-nestjs-graphql",
+  "author": "QubHQ",
+  "contributors": ["Vladyslav Zavalykhatko (original author)"],
+  "homepage": "https://github.com/qubhq/eslint-plugin-nestjs-graphql",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hatko/eslint-plugin-nestjs-graphql.git"
+    "url": "https://github.com/qubhq/eslint-plugin-nestjs-graphql.git"
   },
   "bugs": {
-    "url": "https://github.com/Hatko/eslint-plugin-nestjs-graphql/issues"
+    "url": "https://github.com/qubhq/eslint-plugin-nestjs-graphql/issues"
   },
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Ensure correct typing for NestJS GraphQL decorated methods",
   "main": "./dist/index.js",
   "files": [
