@@ -1,7 +1,9 @@
 {
   "name": "@qubhq/eslint-plugin-nestjs-graphql",
   "author": "QubHQ",
-  "contributors": ["Vladyslav Zavalykhatko (original author)"],
+  "contributors": [
+    "Vladyslav Zavalykhatko (original author)"
+  ],
   "homepage": "https://github.com/qubhq/eslint-plugin-nestjs-graphql",
   "repository": {
     "type": "git",
@@ -18,15 +20,21 @@
   ],
   "scripts": {
     "bump": "pnpx npm-check-updates -u --deep && pnpm i && pnpm upgrade",
-    "build": "pnpm tsc"
+    "build": "rimraf dist && pnpm tsc"
   },
-  "keywords": ["eslint", "plugin", "nestjs", "graphql"],
+  "keywords": [
+    "eslint",
+    "plugin",
+    "nestjs",
+    "graphql"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@types/estree": "^1.0.7",
     "@types/node": "^22.15.18",
-    "@typescript-eslint/utils": "^8.32.1",
     "@typescript-eslint/types": "^8.32.1",
+    "@typescript-eslint/utils": "^8.32.1",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3"
   }
 }
